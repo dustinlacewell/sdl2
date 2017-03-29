@@ -105,6 +105,12 @@ else:
 proc gameControllerAddMapping* (mappingString: cstring): cint {.
   importc: "SDL_GameControllerAddMapping".}
 
+proc gameControllerAddMappingsFromRW* (rw: RWopsPtr, freerw: cint): cint {.
+  importc: "SDL_GameControllerAddMappingsFromRW".}
+
+proc gameControllerAddMappingsFromFile* (file: cstring): cint =
+  return gameControllerAddMappingsFromRW(rwFromFile(file, "rb"), 1)
+
 ##
 #   Get a mapping string for a GUID
 #

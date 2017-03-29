@@ -721,6 +721,8 @@ const SDL_ANDROID_EXTERNAL_STORAGE_WRITE* = cint(0x02)
 when not defined(SDL_Static):
   {.push callConv: cdecl, dynlib: LibName.}
 
+proc getBasePath*(): cstring {.
+  importc: "SDL_GetBasePath".}
 
 ## functions whose names have been shortened by elision of a type name
 proc getWMInfo*(window: WindowPtr; info: var WMInfo): Bool32 {.
@@ -1387,7 +1389,7 @@ proc warpMouseInWindow*(window: WindowPtr; x, y: cint)  {.
 proc setRelativeMouseMode*(enabled: Bool32): SDL_Return  {.
   importc: "SDL_SetRelativeMouseMode".}
 #*
-proc captureMouse*(enabled: Bool32): SDL_Return {.
+proc captureMouse*(enabled: bool): SDL_Return {.
   importc: "SDL_CaptureMouse" .}
 #*
 proc getRelativeMouseMode*(): Bool32 {.importc: "SDL_GetRelativeMouseMode".}
